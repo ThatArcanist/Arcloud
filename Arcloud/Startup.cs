@@ -1,6 +1,9 @@
+using Arcloud.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,12 +28,12 @@ namespace Arcloud
         {
             services.AddControllersWithViews();
 
-            //services.AddDbContext<AppDbContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 
-            //services.AddScoped<IPieRepository, PieRepository>();
+            services.AddScoped<IUploadRepository, UploadRepository>();
             //services.AddScoped<ICategoryRepository, CategoryRepository>();
             //services.AddScoped<IOrderRepository, OrderRepository>();
             //services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
