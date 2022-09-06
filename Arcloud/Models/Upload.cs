@@ -23,9 +23,7 @@ namespace Arcloud.Models
         [StringLength(50)]
         public string UploadAuthor { get; set; }
 
-        [Required(ErrorMessage = "Please choose a file to upload")]
-        [Display(Name = "Upload")]
-        public FormFile UploadFile { get; set; }
+        public byte[] UploadFile { get; set; }
 
     }
 }
