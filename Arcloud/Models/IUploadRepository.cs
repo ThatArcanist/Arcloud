@@ -4,6 +4,6 @@ namespace Arcloud.Models
 {
     public class IUploadRepository
     {
-        IEnumerable<Upload> AllUploads { get; }
+        public IEnumerable<Upload> AllUploads { get; }
     }
 }

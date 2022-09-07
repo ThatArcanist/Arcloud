@@ -19,5 +19,19 @@ namespace Arcloud.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Index(Upload upload)
+        {
+            var uploads = uploadRepository.AllUploads;
+
+            if (ModelState.IsValid)
+            {
+                // Add upload to DB
+                return RedirectToAction("UploadComplete");
+            }
+
+            return View(upload);
+        }
     }
 }
