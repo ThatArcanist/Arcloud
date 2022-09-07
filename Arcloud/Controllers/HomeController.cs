@@ -1,4 +1,6 @@
 ﻿using Arcloud.Models;
+using Arcloud.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arcloud.Controllers
@@ -21,17 +23,16 @@ namespace Arcloud.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Upload upload)
+        public IActionResult Index(UploadViewModel uploadVm)
         {
             var uploads = uploadRepository.AllUploads;
-
             if (ModelState.IsValid)
             {
                 // Add upload to DB
                 return RedirectToAction("UploadComplete");
             }
 
-            return View(upload);
+            return View(uploadVm);
         }
     }
 }

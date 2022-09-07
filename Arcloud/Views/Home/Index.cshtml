@@ -1,4 +1,4 @@
-﻿@model Upload
+﻿@model UploadViewModel
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
@@ -20,7 +20,7 @@
         </div>
     </nav>
 
-    <form asp-action="Index" method="post" class="form-horizontal" role="form">
+    <form asp-action="Index" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     <h4>upload your cringe song loser.</h4>
 
     <div asp-validation-summary="All" class="text-danger"></div>
