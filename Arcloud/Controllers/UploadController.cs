@@ -9,6 +9,7 @@ namespace Arcloud.Controllers
         private readonly AppDbContext appDbContext;
         private readonly IUploadRepository uploadRepository;
 
+        //https://stackoverflow.com/questions/20925822/asp-net-mvc-5-identity-how-to-get-current-applicationuser
         public UploadController(AppDbContext appDbContext, IUploadRepository uploadRepository)
         {
             this.appDbContext = appDbContext;
