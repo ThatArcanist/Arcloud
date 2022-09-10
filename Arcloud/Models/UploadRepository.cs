@@ -12,5 +12,11 @@ namespace Arcloud.Models
         }
 
         public IEnumerable<Upload> AllUploads => appDbContext.Uploads;
+
+        public void AddUpload(Upload upload)
+        {
+            appDbContext.Uploads.Add(upload);
+            appDbContext.SaveChanges();
+        }
     }
 }

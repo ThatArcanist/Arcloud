@@ -1,1 +1,5 @@
-﻿Home Page
+﻿@model IEnumerable<Upload>
+
+@foreach (var upload in Model){
+    @upload.UploadTitle<br />
+}

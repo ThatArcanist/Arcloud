@@ -19,7 +19,7 @@ namespace Arcloud.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(uploadRepository.AllUploads);
         }
 
         [HttpPost]
