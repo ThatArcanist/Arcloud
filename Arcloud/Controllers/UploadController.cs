@@ -1,4 +1,5 @@
-﻿using Arcloud.Models;
+﻿using Arcloud.Migrations;
+using Arcloud.Models;
 using Arcloud.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Security.Claims;
+using static System.Net.WebRequestMethods;
 
 namespace Arcloud.Controllers
 {
@@ -17,7 +19,6 @@ namespace Arcloud.Controllers
 
         private string user;
 
-        //https://stackoverflow.com/questions/20925822/asp-net-mvc-5-identity-how-to-get-current-applicationuser
         public UploadController(AppDbContext appDbContext, IUploadRepository uploadRepository, IHttpContextAccessor httpContextAccessor)
         {
             this.appDbContext = appDbContext;
@@ -35,12 +36,20 @@ namespace Arcloud.Controllers
         [HttpPost]
         public IActionResult Index(UploadViewModel uploadVm)
         {
-            byte[] fileBytes = null;
-
-            using (var ms = new MemoryStream())
+            string uploadPath = "C:/Songs/";
+            if (!Directory.Exists(uploadPath))
             {
-                uploadVm.UploadFile.CopyTo(ms);
-                fileBytes = ms.ToArray();
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            var file = uploadVm.UploadFile;
+
+            string fileName = file.FileName;
+
+            string filePath = Path.Combine(uploadPath, fileName);
+            using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
             }
 
             Upload upload = new Upload()
@@ -48,7 +57,7 @@ namespace Arcloud.Controllers
                 UploadAuthor = uploadVm.UploadAuthor,
                 UploadUser = user,
                 UploadTitle = uploadVm.UploadTitle,
-                UploadContent = fileBytes
+                UploadPath = fileName
             };
 
             if (ModelState.IsValid)

@@ -1,7 +1,11 @@
-﻿using Arcloud.Models;
+﻿using Arcloud.Migrations;
+using Arcloud.Models;
 using Arcloud.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
+using System.Linq;
 
 namespace Arcloud.Controllers
 {
@@ -18,7 +22,7 @@ namespace Arcloud.Controllers
         }
 
         public IActionResult Index()
-        {
+        {            
             return View(uploadRepository.AllUploads);
         }
 
