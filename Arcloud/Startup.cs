@@ -55,6 +55,11 @@ namespace Arcloud
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
+            if(!Directory.Exists("C:/Songs/"))
+            {
+                Directory.CreateDirectory("C:/Songs/");
+            }
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
